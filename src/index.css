@@ -1,0 +1,11 @@
+/* html,body{
+    height: 100vh;
+}
+
+#root{
+    height: 100%;
+} */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
