@@ -1,6 +1,6 @@
 import { firebaseDB } from "../../firebase/config"
 import {doc, collection, setDoc, getDocs} from "firebase/firestore"
-import { addCollection, addPhotoToCollection, setCollection, updatePhotoFromCollection, } from "./collectionsSlice"
+import { addCollection, setCollection, updatePhotoFromCollection, } from "./collectionsSlice"
 
 export const startAddCollection = (name) => {
     return async (dispatch, getState) => {

@@ -1,28 +1,16 @@
-import { useSelector } from "react-redux"
 import { NavBar } from "../components/Navbar"
-import { useNavigate } from "react-router-dom"
-import { selectCollectionByName } from "../store/collections/collectionsSlice"
-import { useDispatch } from "react-redux"
 import addIconCollection from '../assets/Plus.svg'
-import { startAddCollection } from "../store/collections/thunks"
 import { CollectionModal } from "../components/Modal"
 import { SearchBar } from "../components/SearchBar"
 import { useState } from "react"
+import { Toaster,} from "react-hot-toast"
+import { useCollection } from "../hooks/useCollection"
 
 export const CollectionPage = () => {
 
+    const {collections,createCollecttion, selectedCollection} = useCollection()
     const [isOpen, setIsOpen] = useState(false)
-    const {collections} = useSelector(state => state.collections)
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
-    const handleSelectCollection = (name) => {
-        dispatch(selectCollectionByName(name))
-        navigate(`/collections/${name}`)
-    }
-
-    const handleAddCollection = (name) => {
-        dispatch(startAddCollection(name))
-    }
+    
 
     return (
         <div className="overflow-x-hidden">
@@ -38,7 +26,7 @@ export const CollectionPage = () => {
             < CollectionModal isOpen={isOpen} updateOpen={() => setIsOpen(false)}>
 
 
-                < SearchBar onSubmit={handleAddCollection} placeHolder="name of collection">
+                < SearchBar onSubmit={createCollecttion} placeHolder="name of collection">
                     <button 
                     type="submit"
                     className="bg-gray-200 px-14 py-3 text-sm"
@@ -58,7 +46,7 @@ export const CollectionPage = () => {
                         src={collection.photosUrls} 
                         alt="" 
                         className="h-60 w-1/2 md:w-full rounded-sm object-cover cursor-pointer inline-block"
-                        onClick={() => handleSelectCollection(collection.name)}
+                        onClick={() => selectedCollection(collection.name)}
                         />
                         <h3 className="mt-3 font-bold">{collection.name}</h3>
                         <small className="text-gray-400">{`${collection.photosUrls.length} Photos`}</small>
@@ -66,6 +54,7 @@ export const CollectionPage = () => {
                 ))
                }
             </div>
+            < Toaster />
         </div>        
     )
 }

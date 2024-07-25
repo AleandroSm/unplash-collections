@@ -8,6 +8,7 @@ import { DetailInfo } from "../components/DetailInfo"
 import { SearchBar } from "../components/SearchBar"
 import { useCollection } from "../hooks/useCollection"
 import addIcon from '../assets/Plus.svg'
+import { Toaster, } from "react-hot-toast"
 
 export const DetailPage = () => {
 
@@ -54,7 +55,7 @@ export const DetailPage = () => {
             </div>
 
             </div>
-
+            < Toaster />
         </>
     )
 }       
