@@ -1,12 +1,16 @@
 import plusIcon from "../assets/Plus.svg"
 import downloadIcon from "../assets/downArrow.svg"
+import { useModal } from "../hooks/useModal"
 
-export const DetailInfo = ({openModal}) => {
+export const DetailInfo = () => {
+
+    const {handleOpenModal} = useModal()
+
     return (
         <div className="mt-6 font-bold">
             <button
                 className="bg-gray-200 px-10 py-3 mr-4 text-sm relative "
-                onClick={() => openModal(true)}
+                onClick={handleOpenModal}
             >
                 Add to collection
                 <img src={plusIcon} alt="" className="absolute inline left-3 top-[30%]" />

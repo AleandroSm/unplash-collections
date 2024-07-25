@@ -1,6 +1,5 @@
 import { NavBar } from "../components/Navbar"
 import { CollectionModal } from "../components/Modal"
-import { useState } from "react"
 import { CollectionItem } from "../components/CollectionItem"
 import removeIcon from "../assets/Remove.svg"
 import { UserInfo } from "../components/UserInfo"
@@ -12,25 +11,26 @@ import { Toaster, } from "react-hot-toast"
 
 export const DetailPage = () => {
 
-    const {photoInCollections,photoNotInCollections,addPhotoToCollection,removePhotoFromCollection, selectedPhoto}  = useCollection()
-    const [isOpen, setIsOpen] = useState(false)
+    const {photoInCollections,photoNotInCollections,addPhotoToCollection,removePhotoFromCollection, 
+        selectedPhoto, searchCollectionsInModal, collectionsModal
+    } 
+     = useCollection()
 
     const formattedDate = new Date(selectedPhoto?.created_at).toLocaleDateString('en-GB', {year: 'numeric', month: 'long', day: 'numeric'})
 
-    
     return (
         <>
             <NavBar />
 
-            < CollectionModal isOpen={isOpen} updateOpen={() => setIsOpen(false)}>
+            < CollectionModal >
                     
-                < SearchBar placeHolder="search collection by name" />
+                < SearchBar onChange={searchCollectionsInModal} placeHolder="search collection by name" />
 
-                <p className='py-2 text-gray-500 text-sm'>{`${photoNotInCollections.length} matches`}</p>
+                <p className='py-2 text-gray-500 text-sm'>{`${collectionsModal.length} matches`}</p>
 
                 <div className='mt-2'>
                     {
-                        photoNotInCollections.map((collection) => (
+                      collectionsModal && collectionsModal.map((collection) => (
                             < CollectionItem collection={collection} onClick={addPhotoToCollection} key={collection.id} text={"Add to collection"} icon={addIcon} />
                         ))
                     }
@@ -44,13 +44,13 @@ export const DetailPage = () => {
                 < UserInfo photo={selectedPhoto.user.profile_image.medium} 
                 name={selectedPhoto.user.name} date={formattedDate} />
                 
-                < DetailInfo openModal={setIsOpen} />
+                < DetailInfo />
                 
                 <h2 className="mt-8 font-bold text-2xl">Collections</h2>
             {
-                photoInCollections.map(collection => (
+                photoInCollections.length > 0 ? photoInCollections.map(collection => (
                     < CollectionItem onClick={removePhotoFromCollection} collection={collection} key={collection?.id} text={"Remove"} icon={removeIcon} />
-                ))
+                )) : <p className="mt-2 text-gray-500">No collections found</p>
             }
             </div>
 
