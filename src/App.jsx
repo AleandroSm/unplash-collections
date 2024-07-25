@@ -1,15 +1,9 @@
-import { NavBar } from './components/Navbar'
-import { SearchView } from './views/SearchView'
+import AppRouterWrapper from './router/AppRouterWrapper'
 
 function App() {
 
-
-  return (
-    <>
-      < NavBar />
-      < SearchView />
-    </>
-  )
+  return < AppRouterWrapper/>
+  
 }
 
 export default App

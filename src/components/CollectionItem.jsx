@@ -1,7 +1,7 @@
 
 export const CollectionItem = ({collection, text,icon, onClick}) => {
     return (
-        <div className='flex items-center gap-4 hover:bg-gray-300 rounded-xl relative 
+        <div className='flex items-center gap-4 hover:bg-gray-300 rounded-xl relative cursor-pointer
         ' onClick={() => onClick(collection.name)}>
             <img src={collection.photosUrls} alt="" className='w-24 h-24 rounded-lg py-3 pl-2 ' />
             <div>
