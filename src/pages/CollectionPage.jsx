@@ -2,16 +2,15 @@ import { NavBar } from "../components/Navbar"
 import addIconCollection from '../assets/Plus.svg'
 import { CollectionModal } from "../components/Modal"
 import { SearchBar } from "../components/SearchBar"
-import { useState } from "react"
 import { Toaster,} from "react-hot-toast"
 import { useCollection } from "../hooks/useCollection"
+import { useModal } from "../hooks/useModal"
 
 export const CollectionPage = () => {
 
     const {collections,createCollecttion, selectedCollection} = useCollection()
-    const [isOpen, setIsOpen] = useState(false)
+    const {handleOpenModal} = useModal()
     
-
     return (
         <div className="overflow-x-hidden">
             < NavBar />
@@ -20,10 +19,10 @@ export const CollectionPage = () => {
             <img 
             className="md:ml-16 hover:bg-slate-400 p-4 w-16 cursor-pointer rounded-full" 
             src={addIconCollection} alt="icon add" 
-            onClick={() => setIsOpen(true)}
+            onClick={handleOpenModal}
             />
 
-            < CollectionModal isOpen={isOpen} updateOpen={() => setIsOpen(false)}>
+            < CollectionModal >
 
 
                 < SearchBar onSubmit={createCollecttion} placeHolder="name of collection">
