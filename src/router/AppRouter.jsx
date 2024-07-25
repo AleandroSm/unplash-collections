@@ -1,12 +1,9 @@
-import {lazy, Suspense} from 'react'
 import { createBrowserRouter } from "react-router-dom"
 import { SearchPage } from "../pages/SearchPage"
 import { ResultsPage } from "../pages/ResultPage"
 import { DetailPage } from "../pages/DetailPage"
 import { CollectionPage } from "../pages/CollectionPage"
 import { CollectionDetailPage } from "../pages/CollectionDetailPage"
-
-
 
 export const router = createBrowserRouter([
     {
