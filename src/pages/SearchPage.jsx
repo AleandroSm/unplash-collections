@@ -1,7 +1,15 @@
-import App from "../App"
+import { NavBar } from "../components/Navbar"
+import { SearchView } from "../views/SearchView"
 
 export const SearchPage = () => {
+
+    
     return (
-        < App />
+        <>
+            < NavBar />
+
+            < SearchView />
+        
+        </>
     )
 }
