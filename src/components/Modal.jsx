@@ -1,4 +1,6 @@
 import Modal from 'react-modal'
+import { useSelector } from 'react-redux';
+import { useModal } from '../hooks/useModal';
 
 const customStyles = {
     content: {
@@ -14,13 +16,15 @@ const customStyles = {
 
 Modal.setAppElement('#root');
 
-export const CollectionModal = ({ isOpen, updateOpen,children }) => {
+export const CollectionModal = ({ children }) => {
 
+    const {isOpen} = useSelector(state => state.modal)
+    const {handleCloseModal} = useModal()
 
     return (
         < Modal
             isOpen={isOpen}
-            onRequestClose={updateOpen}
+            onRequestClose={handleCloseModal}
             style={customStyles}
         >
             <h2 className="text-center mb-4 font-bold">Add to Collection</h2>
