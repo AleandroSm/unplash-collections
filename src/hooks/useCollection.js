@@ -19,13 +19,13 @@ export const useCollection = () => {
     const photoNotInCollections = collections.filter(collection => collection.photosUrls.every(url => url.slice(0,url.indexOf('?')) !== selectedPhoto?.urls.regular.slice(0,selectedPhoto?.urls.regular.indexOf('?'))))
     const [collectionsModal, setCollectionsModal] = useState(photoNotInCollections)
 
+   
     const existsCollection = (name) => collections.some(collection => collection.name.toLowerCase() === name.toLowerCase())
 
     const addPhotoToCollection = (name) => {
         dispatch(selectCollectionByName(name))
         dispatch(addPhotoToSelectedCollection(selectedPhoto?.urls.regular))
         dispatch(startAddPhotoToCollection())
-        notify("Photo added to collection")
         handleCloseModal()
         setCollectionsModal(photoNotInCollections)
     }
@@ -39,7 +39,7 @@ export const useCollection = () => {
         dispatch(selectCollectionByName(name))
         dispatch(removePhotoFromSelectedCollection(selectedPhoto?.urls.regular.slice(0,selectedPhoto.urls.regular.indexOf('?'))))
         dispatch(startDeletePhotoFromCollection())
-        notify("Photo removed from collection")
+        notify("Photo removed from the collection")
     }
 
     const createCollecttion = (name) => {
