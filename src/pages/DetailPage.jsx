@@ -11,13 +11,14 @@ import { Toaster, } from "react-hot-toast"
 
 export const DetailPage = () => {
 
-    const {photoInCollections,photoNotInCollections,addPhotoToCollection,removePhotoFromCollection, 
+    const {photoInCollections,addPhotoToCollection,removePhotoFromCollection, 
         selectedPhoto, searchCollectionsInModal, collectionsModal
     } 
      = useCollection()
 
     const formattedDate = new Date(selectedPhoto?.created_at).toLocaleDateString('en-GB', {year: 'numeric', month: 'long', day: 'numeric'})
 
+    
     return (
         <>
             <NavBar />
@@ -31,7 +32,7 @@ export const DetailPage = () => {
                 <div className='mt-2'>
                     {
                       collectionsModal && collectionsModal.map((collection) => (
-                            < CollectionItem collection={collection} onClick={addPhotoToCollection} key={collection.id} text={"Add to collection"} icon={addIcon} />
+                            < CollectionItem collection={collection} addItem={addPhotoToCollection} key={collection.id} text={"Add to collection"} icon={addIcon} />
                         ))
                     }
                 </div>
@@ -49,7 +50,7 @@ export const DetailPage = () => {
                 <h2 className="mt-8 font-bold text-2xl">Collections</h2>
             {
                 photoInCollections.length > 0 ? photoInCollections.map(collection => (
-                    < CollectionItem onClick={removePhotoFromCollection} collection={collection} key={collection?.id} text={"Remove"} icon={removeIcon} />
+                    < CollectionItem removeItem={removePhotoFromCollection} collection={collection} key={collection?.id} text={"Remove"} icon={removeIcon} />
                 )) : <p className="mt-2 text-gray-500">No collections found</p>
             }
             </div>

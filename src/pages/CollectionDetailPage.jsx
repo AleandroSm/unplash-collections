@@ -18,7 +18,7 @@ export const CollectionDetailPage = () => {
                 selectedCollection.photosUrls.map((photo, index) => (
                     <img 
                     src={photo} 
-                    alt="" key={index} 
+                    alt="photo of unplash" key={index} 
                     className="rounded-xl cursor-pointer max-w-full mt-4"
                     />
                     
