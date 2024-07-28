@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   photos: [],
   selectedPhoto: null,
-  isLoading: true
+  isLoading: false
 }
 
 export const photosSlice = createSlice({

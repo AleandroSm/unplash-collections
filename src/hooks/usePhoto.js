@@ -10,11 +10,11 @@ export const usePhoto = (query) => {
     const navigate = useNavigate()
     useEffect(() => {
 
+        dispatch(setLoadingPhotos(true))
         const getPhotos = async () => {
             try {
                 const res = await unsplashApi.search.getPhotos({query:query, orientation:'landscape',perPage:20})
                 if(res.status === 200){
-                    dispatch(setLoadingPhotos(true))
                     dispatch(addPhotos(res.response.results))
                 }                
             } catch (error) {
