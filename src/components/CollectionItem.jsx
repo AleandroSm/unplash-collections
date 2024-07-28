@@ -38,7 +38,15 @@ export const CollectionItem = ({collection, text,icon, addItem, removeItem}) => 
                 <img src={icon} alt="icon" className=""/>
                 <span className="text-sm font-semibold">{text}</span>
             </div>
-            < Toaster />
+            < Toaster 
+                toastOptions={{
+                    custom: {
+                        duration: 1000,
+                    }
+
+                }}
+            
+            />
         </div>
     )
 }

@@ -27,11 +27,11 @@ export const useCollection = () => {
         dispatch(addPhotoToSelectedCollection(selectedPhoto?.urls.regular))
         dispatch(startAddPhotoToCollection())
         handleCloseModal()
-        setCollectionsModal(photoNotInCollections)
+        setCollectionsModal(collections.filter(collection => collection.photosUrls.some(url => url.slice(0,url.indexOf('?')) === selectedPhoto?.urls.regular.slice(0,selectedPhoto?.urls.regular.indexOf('?')))))
     }
 
     const searchCollectionsInModal = (name = "") => {
-        if(name.length <= 3) setCollectionsModal(photoNotInCollections)
+        if(name.length <= 2) setCollectionsModal(photoNotInCollections)
         else setCollectionsModal(photoNotInCollections.filter(collection => collection.name.toLowerCase().includes(name.toLowerCase())))
     }
 
