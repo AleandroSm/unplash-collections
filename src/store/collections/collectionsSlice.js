@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   id: localStorage.getItem("id") || localStorage.setItem("id", Math.random().toString(36).substring(2,9)),
+  selectedCollection: [],
   collections: [],
-  selectedCollection: null,
 }
 
 export const collectionsSlice = createSlice({
@@ -19,10 +19,11 @@ export const collectionsSlice = createSlice({
       state.selectedCollection = state.collections.find(collection => collection.name === action.payload)
     },
     addPhotoToSelectedCollection: (state,action) => {
-      state.selectedCollection.photosUrls = [...state.selectedCollection.photosUrls, action.payload]
+      const {photos} = state.selectedCollection
+      photos.push(action.payload)
     },
     removePhotoFromSelectedCollection: (state,action) => {
-      state.selectedCollection.photosUrls = state.selectedCollection.photosUrls.filter(url => url.slice(0,url.indexOf('?')) !== action.payload)
+      state.selectedCollection.photos = state.selectedCollection.photos.filter(photo => photo.idPhoto !== action.payload)
     },
     updatePhotoFromCollection: (state, action) => {
       state.collections = state.collections.map(collection => collection.name === state.selectedCollection.name ? action.payload : collection)
