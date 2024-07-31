@@ -11,6 +11,7 @@ export const CollectionPage = () => {
     const {collections,createCollecttion, selectedCollection} = useCollection()
     const {handleOpenModal} = useModal()
     
+
     return (
         <div className="overflow-x-hidden">
             < NavBar />
@@ -42,13 +43,13 @@ export const CollectionPage = () => {
                 collections.map(collection => (
                     <div key={collection.id} className="text-center">
                         <img 
-                        src={collection.photosUrls} 
-                        alt="" 
-                        className="h-60 w-1/2 md:w-full rounded-sm object-cover cursor-pointer inline-block"
+                        src={collection.photos[0]?.urlPhoto} 
+                        alt={collection.photos[0]?.alt} 
+                        className="h-60 w-1/2 md:w-full rounded-sm object-cover cursor-pointer inline-block mr-4"
                         onClick={() => selectedCollection(collection.name)}
                         />
                         <h3 className="mt-3 font-bold">{collection.name}</h3>
-                        <small className="text-gray-400">{`${collection.photosUrls.length} Photos`}</small>
+                        <small className="text-gray-400">{`${collection?.photos?.length} Photos`}</small>
                     </div>
                 ))
                }
