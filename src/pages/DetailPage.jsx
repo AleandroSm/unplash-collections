@@ -8,17 +8,18 @@ import { SearchBar } from "../components/SearchBar"
 import { useCollection } from "../hooks/useCollection"
 import addIcon from '../assets/Plus.svg'
 import { Toaster, } from "react-hot-toast"
+import { usePhoto } from "../hooks/usePhoto"
+import { useParams } from "react-router-dom"
 
 export const DetailPage = () => {
 
-    const {photoInCollections,addPhotoToCollection,removePhotoFromCollection, 
-        selectedPhoto, searchCollectionsInModal, collectionsModal
-    } 
+    const {id} = useParams()
+    const {photoInCollections,addPhotoToCollection,removePhotoFromCollection, searchCollectionsInModal, collectionsModal} 
      = useCollection()
-
+    const {selectedPhoto} = usePhoto("",id)
+    
     const formattedDate = new Date(selectedPhoto?.created_at).toLocaleDateString('en-GB', {year: 'numeric', month: 'long', day: 'numeric'})
 
-    
     return (
         <>
             <NavBar />
@@ -40,12 +41,12 @@ export const DetailPage = () => {
             </CollectionModal> 
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:px-24 px-8 mt-12">
-            <img src={selectedPhoto.urls.full} alt="" className="h-[44rem] object-cover" />
+            <img src={selectedPhoto?.urls?.full} alt="" className="h-[44rem] object-cover" />
             <div>
-                < UserInfo photo={selectedPhoto.user.profile_image.medium} 
-                name={selectedPhoto.user.name} date={formattedDate} />
+                < UserInfo photo={selectedPhoto?.user?.profile_image.medium} 
+                name={selectedPhoto?.user?.name} date={formattedDate} />
                 
-                < DetailInfo />
+                < DetailInfo photo={selectedPhoto} />
                 
                 <h2 className="mt-8 font-bold text-2xl">Collections</h2>
             {
