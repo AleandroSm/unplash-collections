@@ -1,3 +1,4 @@
+import gradient from '../assets/gradiend-bg2x.png'
 import { NavBar } from "../components/Navbar"
 import { SearchBar } from "../components/SearchBar"
 import { PhotosView } from "../views/PhotoView"
@@ -15,7 +16,8 @@ export const ResultsPage = () => {
     return (
         <>
         < NavBar />
-        <div className="mt-4 flex justify-center">
+        <img src={gradient} alt="bg gradient" className='h-20 w-full' />
+        <div className="relative -top-5 flex justify-center">
             < SearchBar onSubmit={searchPhotos} />
         </div>
         {
