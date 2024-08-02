@@ -1,6 +1,6 @@
 import { firebaseDB } from "../../firebase/config"
-import {doc, collection, setDoc, getDocs} from "firebase/firestore"
-import { addCollection, setCollection, updatePhotoFromCollection, } from "./collectionsSlice"
+import {doc, collection, setDoc, getDocs, deleteDoc} from "firebase/firestore"
+import { addCollection, removeCollection, setCollection, updatePhotoFromCollection, } from "./collectionsSlice"
 
 export const startAddCollection = (name) => {
     return async (dispatch, getState) => {
@@ -10,6 +10,15 @@ export const startAddCollection = (name) => {
         const newCollection = {id:newDoc.id,name,photos:[]}
         await setDoc(newDoc, newCollection) 
         dispatch(addCollection(newCollection))
+    }
+}
+
+export const startDeleteCollection = () => {
+    return async (dispatch, getState) => {
+        const {id, selectedCollection} = getState().collections
+        const docRef = doc(firebaseDB,`${id}/unplash/collections/${selectedCollection.id}`)
+        await deleteDoc(docRef)
+        dispatch(removeCollection(selectedCollection.id))
     }
 }
 
