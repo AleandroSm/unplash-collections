@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux"
 import { useSelector } from "react-redux"
 import { addPhotoToSelectedCollection, removePhotoFromSelectedCollection, selectCollectionByName} from "../store/collections/collectionsSlice"
-import {startAddCollection, startAddPhotoToCollection, startDeletePhotoFromCollection} from "../store/collections/thunks"
+import {startAddCollection, startAddPhotoToCollection, startDeleteCollection, startDeletePhotoFromCollection} from "../store/collections/thunks"
 import { useNavigate } from "react-router-dom"
 import { useModal } from "./useModal"
 import { useState, useEffect } from "react"
@@ -62,6 +62,12 @@ export const useCollection = () => {
         }else errorNotify("Collection already exists")
     }
 
+    const deleteCollection = (name) => {
+      dispatch(selectCollectionByName(name))
+      dispatch(startDeleteCollection())
+      succesNotify("Collection deleted")
+    }
+
     const selectedCollection = (name) => {
         dispatch(selectCollectionByName(name))
         navigate(`/collections/${name}`)
@@ -73,6 +79,7 @@ export const useCollection = () => {
         // photoNotInCollections,
         addPhotoToCollection,
         createCollecttion,
+        deleteCollection,
         removePhotoFromCollection,
         selectedPhoto,
         selectedCollection,
