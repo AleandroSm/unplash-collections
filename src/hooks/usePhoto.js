@@ -5,7 +5,6 @@ import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 
-
 export const usePhoto = (query, id = "") => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -21,6 +20,7 @@ export const usePhoto = (query, id = "") => {
                 }                
             } catch (error) {
                 console.log(error)
+                navigate('/error', { state: { message: error.message} });
             } finally{
                 dispatch(setLoadingPhotos(false))
             }
@@ -37,6 +37,7 @@ export const usePhoto = (query, id = "") => {
                 }
             } catch (error) {
                 console.log(error)
+                navigate('/error', { state: { message: error.message } });
             }
         }
         getPhotosById()
