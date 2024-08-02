@@ -12,6 +12,9 @@ export const collectionsSlice = createSlice({
     addCollection: (state,action) => {
       state.collections.push(action.payload)
     },
+    removeCollection: (state,action) => {
+      state.collections = state.collections.filter(collection => collection.id !== action.payload)
+    },
     setCollection: (state, action) => {
       state.collections = action.payload
     },
@@ -35,6 +38,7 @@ export const collectionsSlice = createSlice({
 export const { selectCollectionByName,  
   setCollection,
   addCollection,
+  removeCollection,
   addPhotoToSelectedCollection,
   removePhotoFromSelectedCollection,
   updatePhotoFromCollection,
