@@ -4,20 +4,22 @@ import { ResultsPage } from "../pages/ResultPage"
 import { DetailPage } from "../pages/DetailPage"
 import { CollectionPage } from "../pages/CollectionPage"
 import { CollectionDetailPage } from "../pages/CollectionDetailPage"
+import ErrorPage from "../pages/ErrorPage"
+import ErroApiPage from "../pages/ErroApiPage"
 
 export const router = createBrowserRouter([
     {
         path: '/',
-        element: < SearchPage />
-    
+        element: < SearchPage />,
+        errorElement: < ErrorPage />
     },
     {
         path: '/search/:query',
-        element: < ResultsPage />
+        element: < ResultsPage />,
     },
     {
         path: '/detail/:id',
-        element: < DetailPage />
+        element: < DetailPage />,
     },
     {
         path: '/collections',
@@ -26,5 +28,9 @@ export const router = createBrowserRouter([
     {
         path: '/collections/:name',
         element: < CollectionDetailPage />
+    },
+    {
+        path: '/error',
+        element: < ErroApiPage />
     }
 ])
