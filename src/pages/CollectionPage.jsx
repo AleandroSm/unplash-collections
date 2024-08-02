@@ -9,7 +9,7 @@ import { useModal } from "../hooks/useModal"
 
 export const CollectionPage = () => {
 
-    const {collections,createCollecttion, selectedCollection} = useCollection()
+    const {collections,createCollecttion, selectedCollection,deleteCollection} = useCollection()
     const {handleOpenModal} = useModal()
     
     return (
@@ -34,7 +34,7 @@ export const CollectionPage = () => {
 
             {collections.length > 0 ?
             
-            < CollectionView collections={collections} selectedCollection={selectedCollection} openModal={handleOpenModal} />
+            < CollectionView collections={collections} removeCollection={deleteCollection} selectedCollection={selectedCollection} openModal={handleOpenModal} />
             :
             < CollectionEmptyView openModal={handleOpenModal} />
             }
