@@ -13,6 +13,7 @@ export const usePhoto = (query, id = "") => {
 
         dispatch(setLoadingPhotos(true))
         const getPhotos = async () => {
+            if(!query) return
             try {
                 const res = await unsplashApi.search.getPhotos({query:query, orientation:'landscape',page:Math.floor(Math.random()*10),perPage:30})
                 if(res.status === 200){
@@ -29,7 +30,9 @@ export const usePhoto = (query, id = "") => {
     }, [query])
 
     useEffect(() => {
+        dispatch(setLoadingPhotos(true))
         const getPhotosById = async () => {
+            if(!id) return
             try {
                 const res = await unsplashApi.photos.get({photoId:id})
                 if(res.status === 200){
@@ -38,6 +41,8 @@ export const usePhoto = (query, id = "") => {
             } catch (error) {
                 console.log(error)
                 navigate('/error', { state: { message: error.message } });
+            } finally{
+                dispatch(setLoadingPhotos(false))
             }
         }
         getPhotosById()
